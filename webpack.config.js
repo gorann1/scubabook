@@ -1,4 +1,8 @@
 const Encore = require('@symfony/webpack-encore');
+const PurgeCssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
+const path = require('path');
+
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -23,10 +27,12 @@ Encore
     .addEntry('app', './assets/app.js')
 
     .addAliases({
-        '@': `${__dirname}/assets`,
+        '@': path.resolve(__dirname, 'assets'),
     })
 
     .enableVueLoader()
+
+    .enablePostCssLoader()
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

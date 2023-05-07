@@ -21,7 +21,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 </template>
 
 <style>
-@import '@/base.css';
+@import './base.css';
 
 #app {
     max-width: 1280px;
