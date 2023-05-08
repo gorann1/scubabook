@@ -3,22 +3,18 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\RegionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\CityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 
-#[ORM\Entity(repositoryClass: RegionRepository::class)]
-#[ApiResource]
-class Region
+#[ORM\Entity(repositoryClass: CityRepository::class)]
+#[ApiResource (order: ['name' => 'ASC'])]
+class City
 {
-
     use TimestampableEntity;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -29,6 +25,10 @@ class Region
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cities')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Region $region = null;
 
     /**
      * @var string|null
@@ -56,21 +56,6 @@ class Region
      */
     private $updated;
 
-    public function __toString(): string {
-        return (string) $this->name;
-    }
-
-    #[ORM\ManyToOne(inversedBy: 'regions')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Country $country = null;
-
-    #[ORM\OneToMany(mappedBy: 'region', targetEntity: City::class)]
-    private Collection $cities;
-
-    public function __construct()
-    {
-        $this->cities = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -101,18 +86,6 @@ class Region
         return $this;
     }
 
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?Country $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
     public function getSlug()
     {
         return $this->slug;
@@ -128,34 +101,15 @@ class Region
         return $this->updated;
     }
 
-    /**
-     * @return Collection<int, City>
-     */
-    public function getCities(): Collection
+    public function getRegion(): ?Region
     {
-        return $this->cities;
+        return $this->region;
     }
 
-    public function addCity(City $city): self
+    public function setRegion(?Region $region): self
     {
-        if (!$this->cities->contains($city)) {
-            $this->cities->add($city);
-            $city->setRegion($this);
-        }
+        $this->region = $region;
 
         return $this;
     }
-
-    public function removeCity(City $city): self
-    {
-        if ($this->cities->removeElement($city)) {
-            // set the owning side to null (unless already changed)
-            if ($city->getRegion() === $this) {
-                $city->setRegion(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

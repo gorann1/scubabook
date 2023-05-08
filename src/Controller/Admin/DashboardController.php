@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Country;
+use App\Entity\City;
 use App\Entity\Region;
 use App\Entity\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -19,6 +20,7 @@ class DashboardController extends AbstractDashboardController
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
         $url = $routeBuilder->setController(CountryCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(CityCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(RegionCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(ZoneCrudController::class)->generateUrl();
                 return $this->redirect($url);
@@ -54,7 +56,7 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
 
         yield MenuItem::section('Resource');
-//        yield MenuItem::linkToCrud('Cities', 'fas fa-map-marker', City::class);
+        yield MenuItem::linkToCrud('Cities', 'fas fa-map-marker', City::class);
         yield MenuItem::linkToCrud('Countries', 'fas fa-flag', Country::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
         yield MenuItem::linkToCrud('Zones', 'fas fa-globe', Zone::class);
