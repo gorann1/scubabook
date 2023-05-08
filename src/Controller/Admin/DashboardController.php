@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Country;
+use App\Entity\Region;
 use App\Entity\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -17,9 +18,10 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-        $url = $routeBuilder->setController(ZoneCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CountryCrudController::class)->generateUrl();
-        return $this->redirect($url);
+        $url = $routeBuilder->setController(RegionCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(ZoneCrudController::class)->generateUrl();
+                return $this->redirect($url);
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -54,7 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Resource');
 //        yield MenuItem::linkToCrud('Cities', 'fas fa-map-marker', City::class);
         yield MenuItem::linkToCrud('Countries', 'fas fa-flag', Country::class);
-//        yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
+        yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
         yield MenuItem::linkToCrud('Zones', 'fas fa-globe', Zone::class);
     }
 }

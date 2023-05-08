@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CountryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -43,6 +45,14 @@ class Country
     #[ORM\ManyToOne(inversedBy: 'countries')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Zone $zone = null;
+
+    #[ORM\OneToMany(mappedBy: 'country', targetEntity: Region::class)]
+    private Collection $regions;
+
+    public function __construct()
+    {
+        $this->regions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +95,11 @@ class Country
         return $this;
     }
 
+    public function __toString(): string {
+        return (string) $this->name;
+    }
+
+
     public function getZone(): ?Zone
     {
         return $this->zone;
@@ -111,5 +126,35 @@ class Country
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @return Collection<int, Region>
+     */
+    public function getRegions(): Collection
+    {
+        return $this->regions;
+    }
+
+    public function addRegion(Region $region): self
+    {
+        if (!$this->regions->contains($region)) {
+            $this->regions->add($region);
+            $region->setCountry($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegion(Region $region): self
+    {
+        if ($this->regions->removeElement($region)) {
+            // set the owning side to null (unless already changed)
+            if ($region->getCountry() === $this) {
+                $region->setCountry(null);
+            }
+        }
+
+        return $this;
     }
 }
