@@ -8,10 +8,14 @@
 composer install
 ```
 
-### Compile and Hot-Reload for Development
+### Workflow
 
 ```symfony
-symfony serve
+1. API Platform
+2. Gedmo Timstable Entity, Slugable Mapping
+3. Serializer Component
+4. CKEditor
+
 ```
 
 ## Vue Setup

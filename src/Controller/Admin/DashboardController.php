@@ -2,9 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\Country;
+use App\Entity\Current;
 use App\Entity\City;
 use App\Entity\Region;
+use App\Entity\Type;
 use App\Entity\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -19,9 +22,12 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
+        $url = $routeBuilder->setController(CategoryCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CountryCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(CurrentCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CityCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(RegionCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(TypeCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(ZoneCrudController::class)->generateUrl();
                 return $this->redirect($url);
 
@@ -52,6 +58,13 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Back To the Website', 'fas fa-home', 'app_home');
+
+        yield MenuItem::section('Attributes');
+        yield MenuItem::linkToCrud('Categories', 'fa fa-bacon', Category::class);
+        yield MenuItem::linkToCrud('Currents', 'fa fa-tags', Current::class);
+        yield MenuItem::linkToCrud('Types', 'fas fa-feather-alt', Type::class);
+
+
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
 

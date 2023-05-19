@@ -3,25 +3,19 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\ZoneRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\TypeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-#[ORM\Entity(repositoryClass: ZoneRepository::class)]
-#[ApiResource]
-class Zone
+
+#[ORM\Entity(repositoryClass: TypeRepository::class)]
+#[ApiResource (order: ['name' => 'ASC'])]
+class Type
 {
-    /**
-     * PROPERTIES WITH GATHERS & SETTERS
-     *
-     */
 
     use TimestampableEntity;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -36,7 +30,7 @@ class Zone
     /**
      * @var string|null
      *
-     * @Gedmo\Slug(fields={"title", "code"})
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true)
      */
     #[ORM\Column(length: 128, unique: true)]
@@ -58,15 +52,6 @@ class Zone
      * @ORM\Column(type="datetime")
      */
     private $updated;
-
-    #[ORM\OneToMany(mappedBy: 'zone', targetEntity: Country::class)]
-    private Collection $countries;
-
-    public function __construct()
-    {
-        $this->countries = new ArrayCollection();
-    }
-
 
     public function getId(): ?int
     {
@@ -110,39 +95,5 @@ class Zone
     public function getUpdated()
     {
         return $this->updated;
-    }
-
-    public function __toString(): string {
-        return (string) $this->name;
-    }
-
-    /**
-     * @return Collection<int, Country>
-     */
-    public function getCountries(): Collection
-    {
-        return $this->countries;
-    }
-
-    public function addCountry(Country $country): self
-    {
-        if (!$this->countries->contains($country)) {
-            $this->countries->add($country);
-            $country->setZone($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCountry(Country $country): self
-    {
-        if ($this->countries->removeElement($country)) {
-            // set the owning side to null (unless already changed)
-            if ($country->getZone() === $this) {
-                $country->setZone(null);
-            }
-        }
-
-        return $this;
     }
 }
