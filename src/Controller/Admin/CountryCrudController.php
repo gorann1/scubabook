@@ -51,6 +51,7 @@ class CountryCrudController extends AbstractCrudController
         yield TextField::new('iso3');
         yield AssociationField::new('zone', 'Zone')->renderAsNativeWidget()
             ->setFormTypeOptionIfNotSet('multiple', false)
+            ->autocomplete()
         ;
         yield DateTimeField::new('createdAt')->hideOnForm();
         yield DateTimeField::new('updatedAt')->hideOnForm();

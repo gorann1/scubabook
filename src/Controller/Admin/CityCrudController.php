@@ -49,7 +49,6 @@ class CityCrudController extends AbstractCrudController
         yield AssociationField::new('region', 'Region')->renderAsNativeWidget()
             ->setFormTypeOptionIfNotSet('multiple', false)
         ;
-        yield SlugField::new('slug')->setTargetFieldName('name');
         yield DateTimeField::new('createdAt')->hideOnForm();
         yield DateTimeField::new('updatedAt')->hideOnForm();
 
