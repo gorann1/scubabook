@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Center;
 use App\Entity\Country;
 use App\Entity\Current;
 use App\Entity\City;
@@ -29,6 +30,7 @@ class DashboardController extends AbstractDashboardController
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
         $url = $routeBuilder->setController(CategoryCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(CenterCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CountryCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CurrentCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(DepthCrudController::class)->generateUrl();
@@ -83,6 +85,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Countries', 'fas fa-flag', Country::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
         yield MenuItem::linkToCrud('Zones', 'fas fa-globe', Zone::class);
+
+        yield MenuItem::section('Places');
+        yield MenuItem::linkToCrud('Centers', 'fas fa-bell', Center::class);
     }
 
     public function configureActions(): Actions

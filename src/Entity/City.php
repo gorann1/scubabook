@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -55,6 +57,19 @@ class City
      * @ORM\Column(type="datetime")
      */
     private $updated;
+
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Center::class)]
+    private Collection $centers;
+
+    public function __construct()
+    {
+        $this->centers = new ArrayCollection();
+    }
+
+    public function __toString(): string {
+        return (string) $this->name;
+    }
+
 
 
     public function getId(): ?int
@@ -109,6 +124,36 @@ class City
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Center>
+     */
+    public function getCenters(): Collection
+    {
+        return $this->centers;
+    }
+
+    public function addCenter(Center $center): self
+    {
+        if (!$this->centers->contains($center)) {
+            $this->centers->add($center);
+            $center->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCenter(Center $center): self
+    {
+        if ($this->centers->removeElement($center)) {
+            // set the owning side to null (unless already changed)
+            if ($center->getCity() === $this) {
+                $center->setCity(null);
+            }
+        }
 
         return $this;
     }

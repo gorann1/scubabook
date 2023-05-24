@@ -1,15 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello Home!{% endblock %}
 
 {% block body %}
 
-<div class="container">
+
+        <!-- Section: Design Block -->
+        <section class="mb-32 text-gray-800 text-center lg:text-left">
+
+            <div class="grid lg:grid-cols-2 gap-6 xl:gap-12 items-center">
+                <div class="mb-6 lg:mb-0">
+                    <h2 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight">
+                        Are you ready <br />
+                        <span class="text-oceanside">for an adventure?</span>
+                    </h2>
+                </div>
+                <div class="mb-6 lg:mb-0">
+                    <p class="uppercase text-tahiti-400 font-bold mb-4">Learn more</p>
+                    <p class="text-gray-500 text-lg">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima officia consequatur
+                        adipisci tenetur repudiandae rerum quos.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+        <!-- Section: Design Block -->
+
     <h3>This is Homepage</h3>
-    <a href="/admin">Admin</a>
+    <a href="{{ path('admin') }}">Admin</a><br />
+    <a href="{{ path('app_contact') }}">Contact</a><br />
+    <a href="{{ path('app_center') }}">Centri</a><br />
     <h1 class="text-3xl font-bold underline">
-        Hello world!
+        Hello App!
     </h1>
-</div>
 
 {% endblock %}
