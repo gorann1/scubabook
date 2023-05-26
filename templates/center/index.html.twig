@@ -3,56 +3,52 @@
 {% block title %}Centri | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="flex justify-center items-center h-screen bg-blue-lightest">
-        <div  class="bg-white w-128 h-60 rounded shadow-md flex card text-grey-darkest">
-            <img class="w-1/2 h-full rounded-l-sm" src="https://bit.ly/2EApSiC" alt="Room Image">
-            <div class="w-full flex flex-col">
-                <div class="p-4 pb-0 flex-1">
-                    <h3 class="font-light mb-1 text-grey-darkest">Tower Hotel</h3>
-                    <div class="text-xs flex items-center mb-4">
-                        <i class="fas fa-map-marker-alt mr-1 text-grey-dark"></i>
-                        Soho, London
-                    </div>
-                    <span class="text-5xl text-grey-darkest">£63.00<span class="text-lg">/PPPN</span></span>
-                    <div class="flex items-center mt-4">
-                        <div class="pr-2 text-xs">
-                            <i class="fas fa-wifi text-green"></i> Free WiFi
-                        </div>
-                        <div class="px-2 text-xs">
-                            <i class="text-grey-darker far fa-building"></i> 2mins to center
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
-                    Book Now
-                    <i class="fas fa-chevron-right"></i>
-                </div>
+    <!-- card with image -->
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+
+            <!-- Column -->
+            {% for center in centers %}
+            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+
+                <!-- Article -->
+                <article class="overflow-hidden rounded-lg shadow-lg">
+
+                    <a href="#">
+                        <img alt="Placeholder" class="block h-auto w-full" src="https://picsum.photos/600/400/?random">
+                    </a>
+
+                    <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                        <h1 class="text-lg">
+                            <a class="no-underline hover:underline text-black" href="{{ path('app_center/show', {'id': center.id})}}">
+                                {{ center.name }}
+                            </a>
+                        </h1>
+                        <p class="text-grey-darker text-sm">
+                            11/1/19
+                        </p>
+                    </header>
+
+                    <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                        <a class="flex items-center no-underline hover:underline text-black" href="#">
+                            <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
+                            <p class="ml-2 text-sm">
+                                {{ center.city.name }}
+                            </p>
+                        </a>
+                        <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+                            <span class="hidden">Like</span>
+                            <i class="fa fa-heart"></i>
+                        </a>
+                    </footer>
+
+                </article>
+                <!-- END Article -->
+
             </div>
-        </div>
-        <div  class="bg-white w-128 h-60 rounded shadow-md flex card text-grey-darkest">
-            <img class="w-1/2 h-full rounded-l-sm" src="https://bit.ly/2EApSiC" alt="Room Image">
-            <div class="w-full flex flex-col">
-                <div class="p-4 pb-0 flex-1">
-                    <h3 class="font-light mb-1 text-grey-darkest">Tower Hotel</h3>
-                    <div class="text-xs flex items-center mb-4">
-                        <i class="fas fa-map-marker-alt mr-1 text-grey-dark"></i>
-                        Soho, London
-                    </div>
-                    <span class="text-5xl text-grey-darkest">£63.00<span class="text-lg">/PPPN</span></span>
-                    <div class="flex items-center mt-4">
-                        <div class="pr-2 text-xs">
-                            <i class="fas fa-wifi text-green"></i> Free WiFi
-                        </div>
-                        <div class="px-2 text-xs">
-                            <i class="text-grey-darker far fa-building"></i> 2mins to center
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
-                    Book Now
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
+            {% endfor %}
+            <!-- END Column -->
+
         </div>
     </div>
 {% endblock %}
