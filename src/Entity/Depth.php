@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DepthRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -48,6 +50,19 @@ class Depth
      */
     private $updated;
 
+    public function __toString(): string {
+        return (string) $this->name;
+    }
+
+
+    #[ORM\OneToMany(mappedBy: 'depth', targetEntity: Location::class)]
+    private Collection $locations;
+
+    public function __construct()
+    {
+        $this->locations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,5 +93,35 @@ class Depth
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations->add($location);
+            $location->setDepth($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            // set the owning side to null (unless already changed)
+            if ($location->getDepth() === $this) {
+                $location->setDepth(null);
+            }
+        }
+
+        return $this;
     }
 }

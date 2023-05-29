@@ -61,9 +61,13 @@ class City
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Center::class)]
     private Collection $centers;
 
+    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'city')]
+    private Collection $locations;
+
     public function __construct()
     {
         $this->centers = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function __toString(): string {
@@ -153,6 +157,33 @@ class City
             if ($center->getCity() === $this) {
                 $center->setCity(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Location>
+     */
+    public function getLocations(): Collection
+    {
+        return $this->locations;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations->add($location);
+            $location->addCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->removeElement($location)) {
+            $location->removeCity($this);
         }
 
         return $this;
