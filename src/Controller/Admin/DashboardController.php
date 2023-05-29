@@ -4,10 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Entity\Center;
+use App\Entity\Contact;
 use App\Entity\Country;
 use App\Entity\Current;
 use App\Entity\City;
 use App\Entity\Depth;
+use App\Entity\Location;
 use App\Entity\Region;
 use App\Entity\Type;
 use App\Entity\Visibility;
@@ -31,10 +33,12 @@ class DashboardController extends AbstractDashboardController
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
         $url = $routeBuilder->setController(CategoryCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CenterCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(CityCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(ContactCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CountryCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(CurrentCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(DepthCrudController::class)->generateUrl();
-        $url = $routeBuilder->setController(CityCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(LocationCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(RegionCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(TypeCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(VisibilityCrudController::class)->generateUrl();
@@ -82,12 +86,15 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Resource');
         yield MenuItem::linkToCrud('Cities', 'fas fa-map-marker', City::class);
+        yield MenuItem::linkToCrud('Contacts', 'fas fa-user', Contact::class);
         yield MenuItem::linkToCrud('Countries', 'fas fa-flag', Country::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
         yield MenuItem::linkToCrud('Zones', 'fas fa-globe', Zone::class);
 
         yield MenuItem::section('Places');
         yield MenuItem::linkToCrud('Centers', 'fas fa-bell', Center::class);
+        yield MenuItem::linkToCrud('Locations', 'fas fa-fish', Location::class);
+
     }
 
     public function configureActions(): Actions
