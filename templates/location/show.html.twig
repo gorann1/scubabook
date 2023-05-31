@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lokacije | {{ parent() }}{% endblock %}
+
+{% block body %}
+<h3>This is LocationsPage</h3>
+<a href="{{ path('admin') }}">Admin</a><br />
+<a href="{{ path('app_contact') }}">Contact</a><br />
+<a href="{{ path('app_home') }}">Home</a><br />
+
+<h2>{{ location.name }} u gradu/mjestu </h2>
+
+{% endblock %}
