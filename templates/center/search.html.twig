@@ -3,12 +3,14 @@
 {% block title %}Centri | {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h3>Stranica jednog centra</h3>
+    <h3>Stranica pretrage centra</h3>
     <a href="{{ path('admin') }}">Admin</a><br />
     <a href="{{ path('app_contact') }}">Contact</a><br />
     <a href="{{ path('app_center') }}">Centri</a><br />
     <a href="{{ path('app_home') }}">Home</a><br />
 
-    <h2>{{ center.name }} u gradu/mjestu {{ center.city.name }}</h2>
+    <div class="form-group mb-6">
+        {{ form(form) }}
+    </div>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 
 ###> symfony/framework-bundle ###
+/_NOTES
 /.env.local
-/.env
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
@@ -16,7 +16,6 @@
 ###< phpunit/phpunit ###
 
 ###> symfony/phpunit-bridge ###
-.phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
