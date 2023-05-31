@@ -1,4 +1,7 @@
 module.exports = {
+  prefix: '',
+  important: false,
+  separator: ':',
   content: [
     './assets/**/*.{vue,js,ts,jsx,tsx}',
     './templates/**/*.{html,twig}'

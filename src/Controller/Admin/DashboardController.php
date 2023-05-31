@@ -12,6 +12,7 @@ use App\Entity\Depth;
 use App\Entity\Location;
 use App\Entity\Region;
 use App\Entity\Type;
+use App\Entity\User;
 use App\Entity\Visibility;
 use App\Entity\Zone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -41,6 +42,7 @@ class DashboardController extends AbstractDashboardController
         $url = $routeBuilder->setController(LocationCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(RegionCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(TypeCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(UserCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(VisibilityCrudController::class)->generateUrl();
         $url = $routeBuilder->setController(ZoneCrudController::class)->generateUrl();
                 return $this->redirect($url);
@@ -89,6 +91,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Contacts', 'fas fa-user', Contact::class);
         yield MenuItem::linkToCrud('Countries', 'fas fa-flag', Country::class);
         yield MenuItem::linkToCrud('Regions', 'fas fa-map-marked-alt', Region::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Zones', 'fas fa-globe', Zone::class);
 
         yield MenuItem::section('Places');
