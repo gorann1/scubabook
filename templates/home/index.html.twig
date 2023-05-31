@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello Home!{% endblock %}
+{% block title %}SCUBAbooker Home!{% endblock %}
 
 {% block body %}
 
@@ -32,8 +32,12 @@
     <a href="{{ path('app_contact') }}">Contact</a><br />
     <a href="{{ path('app_location') }}">Lokacije</a><br />
     <a href="{{ path('app_center') }}">Centri</a><br />
+    <a href="/{{ app.user ? 'logout' : 'login' }}">{{ app.user ? 'Logout' : 'Login' }}</a><br />
+    <a href="{{ path('app_register') }}">Register</a><br />
     <h1 class="text-3xl font-bold underline">
         Hello App!
     </h1>
-
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Email: {{ app.user.email }}</p>
+    {% endif %}
 {% endblock %}
