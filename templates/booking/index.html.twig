@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookingController!{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_home') }}">Home</a><br />
+
+    <div class="grow-0 shrink-0 basis-auto w-full xl:w-5/12 px-3 lg:px-6 mb-12 xl:mb-0">
+        {{ form_start(booking_form) }}
+        {{ form_widget(booking_form) }}
+        {{ form_end(booking_form) }}
+    </div>
+{% endblock %}

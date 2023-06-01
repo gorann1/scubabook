@@ -28,10 +28,13 @@
         <!-- Section: Design Block -->
 
     <h3>This is Homepage</h3>
-    <a href="{{ path('admin') }}">Admin</a><br />
+    {% if is_granted('IS_ADMIN') %}
+        <a href="{{ path('admin') }}">Admin</a><br />
+    {% endif %}
     <a href="{{ path('app_contact') }}">Contact</a><br />
     <a href="{{ path('app_location') }}">Lokacije</a><br />
     <a href="{{ path('app_center') }}">Centri</a><br />
+    <a href="{{ path('app_booking') }}">Booking</a><br />
     <a href="/{{ app.user ? 'logout' : 'login' }}">{{ app.user ? 'Logout' : 'Login' }}</a><br />
     <a href="{{ path('app_register') }}">Register</a><br />
     <h1 class="text-3xl font-bold underline">

@@ -86,10 +86,14 @@ class Location
      */
     private $updated;
 
+    #[ORM\ManyToMany(targetEntity: Booking::class, mappedBy: 'locations')]
+    private Collection $bookings;
+
     public function __construct()
     {
         $this->city = new ArrayCollection();
         $this->center = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,5 +270,32 @@ class Location
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings->add($booking);
+            $booking->addLocation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            $booking->removeLocation($this);
+        }
+
+        return $this;
     }
 }
