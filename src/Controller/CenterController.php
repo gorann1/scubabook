@@ -30,6 +30,7 @@ class CenterController extends AbstractController
     {
         return $this->render('center/show.html.twig', [
            'center' => $center,
+           'center.id' => $center->getId()
         ]);
     }
 

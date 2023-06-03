@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -55,6 +56,7 @@ class Location
     private ?Current $current = null;
 
     #[ORM\ManyToMany(targetEntity: City::class, inversedBy: 'locations')]
+    #[JoinTable(name: 'location_city')]
     private Collection $city;
 
     #[ORM\ManyToMany(targetEntity: Center::class, inversedBy: 'locations')]
@@ -87,6 +89,7 @@ class Location
     private $updated;
 
     #[ORM\ManyToMany(targetEntity: Booking::class, mappedBy: 'locations')]
+
     private Collection $bookings;
 
     public function __construct()
