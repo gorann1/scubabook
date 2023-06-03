@@ -12,6 +12,9 @@
             "src/ApiResource/.gitignore"
         ]
     },
+    "artprima/query-filter-bundle": {
+        "version": "1.8.0"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -68,6 +71,9 @@
         "files": [
             "config/packages/fos_ckeditor.yaml"
         ]
+    },
+    "lexik/form-filter-bundle": {
+        "version": "dev-master"
     },
     "nelmio/cors-bundle": {
         "version": "2.3",
