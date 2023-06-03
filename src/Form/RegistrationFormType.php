@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -19,6 +20,24 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, array('label' => 'Email', 'attr' => array('class' => '
+            block 
+            w-full 
+            rounded-md 
+            border-0 
+            py-1.5 
+            text-gray-900 
+            shadow-sm 
+            ring-1 
+            ring-inset 
+            ring-gray-300 
+            placeholder:text-gray-400 
+            focus:ring-2 
+            focus:ring-inset 
+            focus:ring-indigo-600 
+            sm:text-sm 
+            sm:leading-6
+            ')))
+            ->add('username', TextType::class, array('label' => 'Username', 'attr' => array('class' => '
             block 
             w-full 
             rounded-md 
