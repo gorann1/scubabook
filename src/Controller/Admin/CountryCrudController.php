@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CountryCrudController extends AbstractCrudController
@@ -52,6 +53,7 @@ class CountryCrudController extends AbstractCrudController
         yield AssociationField::new('zone', 'Zone')->renderAsNativeWidget()
             ->setFormTypeOptionIfNotSet('multiple', false)
         ;
+        yield TextField::new('slug')->hideOnForm();
         yield DateTimeField::new('createdAt')->hideOnForm();
         yield DateTimeField::new('updatedAt')->hideOnForm();
     }

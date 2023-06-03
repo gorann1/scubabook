@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -69,7 +70,7 @@ class Center
      */
     private $updated;
 
-    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'center')]
+    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'centers')]
     private Collection $locations;
 
     public function __construct()
