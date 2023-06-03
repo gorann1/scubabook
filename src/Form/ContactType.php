@@ -110,9 +110,9 @@ class ContactType extends AbstractType
                 'required'  => false,
             ])
             ->add('submit',  SubmitType::class, array('label' => 'Potvrdi', 'attr' => array('class' => '
-              w-full
+            w-full
               px-6
-              py-2.5
+              py-16.5
               bg-sky-600
               text-white
               font-medium
