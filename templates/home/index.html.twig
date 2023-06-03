@@ -40,6 +40,9 @@
     <h1 class="text-3xl font-bold underline">
         Hello App!
     </h1>
+        {{ form_start(filtering_form) }}
+        {{ form_widget(filtering_form) }}
+        {{ form_end(filtering_form) }}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <p>Email: {{ app.user.email }}</p>
     {% endif %}

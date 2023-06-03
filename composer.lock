@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c922222319e1cbc1a39ea141dbdc292",
+    "content-hash": "1d97c95be218dc95454adff06ae8bca2",
     "packages": [
         {
             "name": "api-platform/core",
@@ -175,6 +175,62 @@
                 }
             ],
             "time": "2023-05-05T14:18:25+00:00"
+        },
+        {
+            "name": "artprima/query-filter-bundle",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artprima/query-filter-bundle.git",
+                "reference": "e6487a2e3f2708ba92623bfec0d437e2dfab3b83"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artprima/query-filter-bundle/zipball/e6487a2e3f2708ba92623bfec0d437e2dfab3b83",
+                "reference": "e6487a2e3f2708ba92623bfec0d437e2dfab3b83",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^2.2",
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^2.0|^3.0",
+                "php": ">=8.0.0",
+                "sensio/framework-extra-bundle": "^5.1.5|^6.0",
+                "symfony/config": "^4.4|^5.2|^6.0",
+                "symfony/dependency-injection": "^4.4|^5.2|^6.0",
+                "symfony/http-kernel": "^4.4|^5.2|^6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Artprima\\QueryFilterBundle\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Denis Voytyuk",
+                    "email": "ask@artprima.cz"
+                }
+            ],
+            "description": "An easy way to filter requests in your Symfony 4/5/6 application (that uses Doctrine2 as ORM).",
+            "keywords": [
+                "doctrine",
+                "filter",
+                "query",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/artprima/query-filter-bundle/issues",
+                "source": "https://github.com/artprima/query-filter-bundle/tree/1.8.0"
+            },
+            "time": "2022-10-09T06:42:34+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1960,6 +2016,71 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2023-02-20T19:24:07+00:00"
+        },
+        {
+            "name": "lexik/form-filter-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikFormFilterBundle.git",
+                "reference": "6ea14ef782f956fc6acf78bbe423be8a4ac057a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/6ea14ef782f956fc6acf78bbe423be8a4ac057a6",
+                "reference": "6ea14ef782f956fc6acf78bbe423be8a4ac057a6",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.10",
+                "php": ">=7.4",
+                "symfony/form": "^5.3|^6.0",
+                "symfony/framework-bundle": "^5.3|^6.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.8 || ^2.0",
+                "doctrine/mongodb-odm-bundle": "^4.4",
+                "symfony/phpunit-bridge": "^5.3|^6.0",
+                "symfony/var-dumper": "^5.3|^6.0"
+            },
+            "suggest": {
+                "alcaeus/mongo-php-adapter": "Install this package if using the PHP 7 MongoDB Driver"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Lexik\\Bundle\\FormFilterBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                }
+            ],
+            "description": "This bundle aim to provide classes to build some form filters and then build a doctrine query from this form filter.",
+            "homepage": "https://github.com/lexik/LexikFormFilterBundle",
+            "keywords": [
+                "bundle",
+                "doctrine",
+                "filter",
+                "form",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/lexik/LexikFormFilterBundle/issues",
+                "source": "https://github.com/lexik/LexikFormFilterBundle/tree/v8.0.1"
+            },
+            "time": "2023-05-19T06:37:47+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -10688,7 +10809,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "lexik/form-filter-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -19,4 +19,6 @@ return [
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     SymfonyCasts\Bundle\VerifyEmail\SymfonyCastsVerifyEmailBundle::class => ['all' => true],
+    Artprima\QueryFilterBundle\ArtprimaQueryFilterBundle::class => ['all' => true],
+    Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle::class => ['all' => true],
 ];
