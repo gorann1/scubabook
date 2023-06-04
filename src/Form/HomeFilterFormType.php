@@ -9,8 +9,12 @@ use App\Entity\Region;
 use App\Entity\City;
 use App\Form\EventListener\DynamicFieldsSubscriber;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -24,27 +28,32 @@ class HomeFilterFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('zone', EntityType::class, [
-                'class' => Zone::class,
-                'placeholder' => '-- select a zone --',
-            ])
-            ->add('country', EntityType::class, [
-                'class' => Country::class,
-                'placeholder' => '-- select a country --',
-            ])
-            ->add('region', EntityType::class, [
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('region',  EntityType::class, [
                 'class' => Region::class,
-                'placeholder' => '-- select a region --',
-            ])
-            ->add('city', EntityType::class, [
-                'class' => City::class,
-                'placeholder' => '-- select a city --',
-            ])
+                'choice_label' => 'name',
+                'placeholder' => ''])
         ;
+        $formModifier = function (FormInterface $form, Region $region = null) {
+            $cities = null === $region ? [] : $region->getAvailableCities();
 
-        // Add listeners
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+            $form->add('city', EntityType::class, [
+                'class' => City::class,
+                'placeholder' => '',
+                'choices' => $cities,
+            ]);
+        };
+
+        $builder->get('region')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $region = $event->getForm()->getData();
+
+                $formModifier($event->getForm()->getParent(), $region);
+            }
+        );
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

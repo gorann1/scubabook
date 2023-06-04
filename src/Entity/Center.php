@@ -70,7 +70,7 @@ class Center
      */
     private $updated;
 
-    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'centers')]
+    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'center')]
     private Collection $locations;
 
     public function __construct()

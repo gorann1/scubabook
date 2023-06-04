@@ -152,6 +152,9 @@
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/sendgrid-mailer" />
+      <path value="$PROJECT_DIR$/vendor/evercodelab/dependent-select-bundle" />
+      <path value="$PROJECT_DIR$/vendor/artprima/query-filter-bundle" />
+      <path value="$PROJECT_DIR$/vendor/lexik/form-filter-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
